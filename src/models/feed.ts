@@ -14,10 +14,6 @@ const feedModel = new Schema<IFeed>(
             type: Date,
             required: false
         },
-        keyword: {
-            type: String,
-            required: true
-        },
         category_id: {
             type: String,
             required: true

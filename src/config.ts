@@ -7,5 +7,6 @@ export const config = {
             MAX: 20,
             MIN: 5
         }
-    }
+    },
+    OPEN_AI_KEY: process.env.OPEN_AI_KEY || "",
 };

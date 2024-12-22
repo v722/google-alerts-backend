@@ -10,7 +10,7 @@ export const getEntries = [
             const limit = req.query.limit ? Number(req.query.limit) : DEFAULT_ITEMS_PER_PAGE,
                 page = req.query.page ? Number(req.query.page) : DEFAULT_PAGE_NUMBER;
             const totalCount = await EntryModel.count({ feed_id });
-            const items = await EntryModel.find({ feed_id  }).skip((limit * page) - limit).limit(limit);
+            const items = await EntryModel.find({ feed_id  }).sort({ pubDate: -1 }).skip((limit * page) - limit).limit(limit);
             return res.status(200).json(formatSuccessMessage({
                 totalCount,
                 items,

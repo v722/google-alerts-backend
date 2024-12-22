@@ -2,7 +2,6 @@ export interface IFeed {
     title: string;
     feedUrl: string;
     lastBuildDate: Date;
-    keyword: string;
     link: string;
     updated_at: Date;
     category_id: string;
