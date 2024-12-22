@@ -14,7 +14,7 @@ export const createFeed = [
         try {
             const { category_name, url, keyword } = req.body;
             const data = await parser.parseURL(url);
-            const feedsExist = await FeedModel.findOne({ feedUrl: data?.feedUrl });
+            const feedsExist = await FeedModel.findOne({ link: data?.link });
             if (feedsExist) {
                 throw { msg: AppError.FEED_ALREADY_EXIST, status: ErrorCode.NOT_FOUND }
             }
@@ -75,10 +75,10 @@ export const getFeeds = [
         try {
             const { search, category_id } = req.query;
             let whereCondition = {};
-            if (search) {
+            if (search !== "null" && search !== "undefined") {
                 whereCondition = { $or: [{ title: { $regex: search, $options: "i" } }]}
             }
-            if (category_id !== "null") {
+            if (category_id !== "null" && category_id !== "undefined") {
                 whereCondition = {
                     ...whereCondition,
                     category_id
