@@ -12,7 +12,7 @@ export function formatErrorMessage(error: any, data?: any) {
     return {
         success: false,
         code: error?.status || 400,
-        msg: error?.msg || JSON.stringify(error),
+        msg: error?.msg || error?.message || JSON.stringify(error),
         data
     };
 }

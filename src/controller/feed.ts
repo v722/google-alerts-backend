@@ -73,7 +73,7 @@ export const createFeed = [
             await EntryModel.bulkWrite(entries);
             return res.status(200).json(formatSuccessMessage());
         } catch (error) {
-            console.log("Create Feed: failed", error);
+            console.log("Create Feed: failed", error?.message);
             return res.status(error?.status || 400).json(formatErrorMessage(error));
         }
     }
