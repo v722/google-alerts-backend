@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import { formatErrorMessage, formatSuccessMessage } from "../common/handleResponse";
 import { IFeed } from "../interface";
 import { CategoryModel } from "../models/category";
@@ -13,6 +13,15 @@ export const createFeed = [
     async (req: Request, res: Response) => {
         try {
             const { category_name, url, keyword } = req.body;
+            if (!category_name) {
+                throw { msg: AppError.CATEGORY_NAME_NOT_FOUND, status: ErrorCode.NOT_FOUND }
+            }
+            if (!url) {
+                throw { msg: AppError.URL_NOT_FOUND, status: ErrorCode.NOT_FOUND }
+            }
+            if (!keyword) {
+                throw { msg: AppError.KEYWORD_NOT_FOUND, status: ErrorCode.NOT_FOUND }
+            }
             const data = await parser.parseURL(url);
             const feedsExist = await FeedModel.findOne({ link: data?.link });
             if (feedsExist) {
